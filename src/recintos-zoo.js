@@ -9,15 +9,14 @@ class RecintosZoo {
             {numero: 5, bioma:'savana', tamanhoTotal: 9, animais: [{especie: 'LEAO', quantidade: 1}]}
         ]
 
-        this.animais = [
-            {nome: 'LEAO', tamanho: 3, bioma:'savana', carnivoro: true},
-            {nome: 'LEOPARDO', tamanho: 2, bioma:'savana', carnivoro: true},
-            {nome: 'CROCODILO', tamanho: 3, bioma:'rio', carnivoro: true},
-            {nome: 'MACACO', tamanho: 1, bioma:'savana ou floresta', carnivoro: false},
-            {nome: 'GAZELA', tamanho: 3, bioma:'savana', carnivoro: false},
-            {nome: 'HIPOPOTAMO', tamanho: 3, bioma:'savana ou rio', carnivoro: false}
-
-        ]
+        this.animais = {
+          LEAO: { tamanho: 3, biomas: ['savana'] },
+          LEOPARDO: { tamanho: 2, biomas: ['savana'] },
+          CROCODILO: { tamanho: 3, biomas: ['rio'] },
+          MACACO: { tamanho: 1, biomas: ['savana', 'floresta'] },
+          GAZELA: { tamanho: 2, biomas: ['savana'] },
+          HIPOPOTAMO: { tamanho: 4, biomas: ['savana', 'rio'] }
+        };
     }
 
     podeAcomodarRecinto(bioma, animal, quantidade, espaçoLivre, animaisExistentes) {
@@ -64,7 +63,7 @@ class RecintosZoo {
 
         const recintosViaveis = []
 
-        for(recinto of this.recintos){
+        for(const recinto of this.recintos){
             const {bioma, tamanhoTotal, animais} = recinto
             const espacoOcupado = animais.reduce((total, a) => total + (this.animais[a.especie].tamanho * a.quantidade), 0)
             const espacoLivre = tamanhoTotal - espacoOcupado
